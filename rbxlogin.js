@@ -21,7 +21,7 @@ client.on(
         async (message) => {
             const args = message.content.slice(config.prefix.length).trim().split(/ +/);
             const cmd = args.shift().toLowerCase();
-
+            if (message.channel.type === 'dm') return;
 
             switch (cmd) {
                 case 'login':
