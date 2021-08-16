@@ -14,7 +14,7 @@ const config = {
     color: '#03b9f5'
 }
 
-client.on('ready', () => { console.log('Code by KIMMOJI.') });
+client.on('ready', () => { console.log('[+] Code by KIMMOJI.') });
 
 client.on(
     "messageCreate",
