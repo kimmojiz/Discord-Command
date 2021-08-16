@@ -1,4 +1,4 @@
-//require npm [ discord.js, axios ]
+//require npm [ discord.js@13.1.0, axios ]
 
 const { Client, MessageEmbed } = require('discord.js');
 const axios = require('axios');
