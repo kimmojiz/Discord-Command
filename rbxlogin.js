@@ -27,17 +27,16 @@ client.on(
                 case 'login':
                     try {
                     if (!message.guild.me.permissions.has('MANAGE_MESSSAGE')) {
-                        throw '`not have manager message permission.`'
+                        throw new Error('`not have manager message permission.`')
                     } else { message.delete() }
                     
-                    if (!args[0]) throw '`args is empty, Please try again.`'
+                    if (!args[0]) { throw new Error('`args is empty, Please try again.`') };
 
                     await axios.get('https://www.roblox.com/mobileapi/userinfo', {
                         headers: { "Cookie": '.ROBLOSECURITY='+ args[0]}
                     })
                     .then(
                         function(response) {
-                            if (response.data.UserID === undefined) throw 'Fail cookie.'
 
                             var user = response.data;
 
@@ -74,7 +73,7 @@ client.on(
                             
                         }
                     )
-                    .catch( () => { throw '`Fail cookie, Please try again.`' })
+                    .catch( () => { throw new Error('`Fail cookie, Please try again.`') })
 
                     } catch(err) {
                         return message.channel.send('**['+ message.author.tag +'] :** ' + err)
