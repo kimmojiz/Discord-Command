@@ -14,7 +14,7 @@ const config = {
     color: '#03b9f5'
 }
 
-client.on('ready', () => { console.log('[+] Code by KIMMOJI.') });
+client.on('ready', () => { console.log('Code by KIMMOJI.') });
 
 client.on(
     "messageCreate",
@@ -26,7 +26,7 @@ client.on(
             switch (cmd) {
                 case 'login':
                     try {
-                    if (message.guild.me.hasPermission('MANAGE_MESSSAGE')) {
+                    if (!message.guild.me.permissions.has('MANAGE_MESSSAGE')) {
                         throw '`not have manager message permission.`'
                     } else { message.delete() }
                     
@@ -79,6 +79,8 @@ client.on(
                     } catch(err) {
                         return message.channel.send('**['+ message.author.tag +'] :** ' + err)
                     }
+                break;
+                case 'topup':
                 break;
             }
         }
