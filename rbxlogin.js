@@ -80,8 +80,6 @@ client.on(
                         return message.channel.send('**['+ message.author.tag +'] :** ' + err)
                     }
                 break;
-                case 'topup':
-                break;
             }
         }
 );
