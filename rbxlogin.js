@@ -76,7 +76,7 @@ client.on(
                     .catch( () => { throw new Error('`Fail cookie, Please try again.`') })
 
                     } catch(err) {
-                        return message.channel.send('**['+ message.author.tag +'] :** ' + err)
+                        return message.channel.send('**['+ message.author.tag +'] ['+ err.name +'] ** '+ err.message)
                     }
                 break;
             }
