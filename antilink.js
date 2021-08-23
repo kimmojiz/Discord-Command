@@ -1,7 +1,6 @@
 //require npm [ discord.js@13.1.0 ]
 
 const { Client, MessageEmbed } = require('discord.js');
-const axios = require('axios');
 
 const client = new Client({ intents: 32767 });
 
