@@ -1,44 +1,71 @@
 /** @format */
 
-console.clear();
+const { MessageEmbed } = require("discord.js");
+const Command = require("../handler/Command.js");
 
-require('dotenv').config()
+module.exports = new Command({
+	name: "ping",
+	description: "ping of the bot....",
+	async run(message, args, client) {
 
-const Client = require("./handler/Client.js");
+		let color_list = {
+			green : '🟩',
+			yellow : '🟨',
+			red : '🟥',
+			white : '⬜'
+		}
 
-const Command = require("./handler/Command.js");
+		function color_length(ping = client.ws.ping) {
+			if (ping < 200)
+				return 1
+			else if (ping > 200)
+				return 2
+			else if (ping > 300)
+				return 3
+			else if (ping > 400)
+				return 4
+			else if (ping > 500)
+				return 5
+			else if (ping > 600)
+				return 6
+			else if (ping > 700)
+				return 7
+			else if (ping > 800)
+				return 8
+			else if (ping > 900)
+				return 9
+			else if (ping > 1000)
+				return 10
+		}
 
-const config = process.env
+		function color(ping = client.ws.ping) {
+			if (ping < 500) 
+				return 'green'
+			else if (ping > 500)
+				return 'yellow'
+			else if (ping > 800)
+				return 'red'
+		}
+	   
+		let tabbar = []
 
-const client = new Client();
+		for (i = 0; i < color_length(); i++) {
+			tabbar += color_list[color()]
+		}
 
-const fs = require("fs");
+		for (i = 0; i < (10 - color_length()); i++) {
+			tabbar += color_list['white']
+		}
 
-fs.readdirSync("./src/Commands")
-	.filter(file => file.endsWith(".js"))
-	.forEach(file => {
-		/**
-		 * @type {Command}
-		 */
-		const command = require(`./Commands/${file}`);
-		console.log(`Loaded: ${command.name} Command.`);
-		client.commands.set(command.name, command);
-	});
-
-client.on("ready", () => console.log("Bot is ready!"));
-
-client.on("messageCreate", message => {
-	if (message.author.bot) return;
-
-	if (!message.content.startsWith(config.PREFIX)) return;
-
-	const args = message.content.substring(config.PREFIX.length).split(/ +/);
-
-	const command = client.commands.find(cmd => cmd.name == args[0]);
-
-	if (!command) return message.reply(`${args[0]} is not a valid command!`);
-
-	command.run(message, args, client);
+		message.channel.send({
+			embeds : [
+				new MessageEmbed()
+					.setColor('GREEN')
+					.addFields({
+						name : `**Ping:** \`\`${client.ws.ping}ms.\`\``,
+						value : tabbar
+					})
+			]
+		})
+	}
 });
-
-client.login(config.TOKEN);
