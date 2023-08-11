@@ -1,3 +1,5 @@
+// Code by KIMMOJI
+
 const { MessageEmbed } = require("discord.js");
 const Command = require("../handler/Command.js");
 
