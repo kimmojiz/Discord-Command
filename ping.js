@@ -1,6 +1,3 @@
-```js
-/** @format */
-
 const { MessageEmbed } = require("discord.js");
 const Command = require("../handler/Command.js");
 
@@ -52,4 +49,4 @@ module.exports = new Command({
         })
     }
 });
-```
+
